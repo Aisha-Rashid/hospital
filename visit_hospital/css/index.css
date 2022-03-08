@@ -1,0 +1,396 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500&family=Encode+Sans+Semi+Expanded&display=swap');
+@import url('https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css');
+@import url('https://use.fontawesome.com/releases/v5.8.1/css/all.css');
+
+
+*{
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+body{
+    font-family: 'Baloo 2', cursive;
+    font-size:100%;
+    color:#3F3F44;
+}
+file{
+    display : none;
+}
+button{
+    border:none;
+    background:rgba(34, 49, 63, 1);
+    color:#fff;
+    font-family: 'Baloo 2', cursive;
+    height:40px;
+    min-width:10%;
+    cursor: pointer;
+    font-size:110%;
+}
+input{
+    text-align:center;
+    font-size:110%;
+    font-family: 'Baloo 2', cursive;
+    cursor:text;
+}
+select{
+    text-align:center;
+    font-size:110%;
+    font-family: 'Baloo 2', cursive;
+}
+option{
+    text-align:center;
+    font-size:110%;
+    font-family: 'Baloo 2', cursive;
+}
+a{
+    text-decoration:none;
+    color:#fff;
+    cursor:pointer;
+    text-align:center;
+}
+h2{
+    margin:1%;
+}
+h3{
+    margin:1%;
+}
+h4{
+    margin:1%;
+}
+textarea{
+    resize:none;
+    font-family:'Baloo 2', cursive;
+    color:#fff;
+    background:transparent;
+    width:100%;
+    height:auto;
+    border:none;
+}
+input[type=file]{
+    display:none;
+}
+#build{
+    width:100%;
+    height:100%;
+    display:flex;
+    flex-wrap:wrap;
+    scroll-behavior:smooth;
+    position:fixed;
+    flex-direction:column;
+    overflow:hidden;
+    background-image:linear-gradient(rgba(0, 0, 0, 0.4),rgba(0, 0, 0, 0.5),rgba(0,0,0,0.5)),url(https://media.sciencephoto.com/f0/20/52/90/f0205290-800px-wm.jpg);
+    -webkit-background-size:cover;
+    background-size:cover;
+    background-repeat:no-repeat;
+    background-position:center;
+}
+.slide a{
+    width:18%;
+    margin-left:1%;
+}
+.slide{
+    height:10%;
+    bottom:0px;
+    width:100%;
+    position:fixed;
+    display:flex;
+    flex-direction:row;
+    flex-wrap:wrap;
+}
+#pauseWindow{
+    display:none;
+    z-index:17;
+    background:rgb(0,0,0,0.8);
+    width:100%;
+    height:100%;
+    position:fixed;
+    text-align:center;
+}
+#pauseWindowInfo{
+    width:70%;
+    height:auto;
+    background:#fff;
+    margin-left:15%;
+    margin-top:10%;
+}
+#nowGo{
+    height:40px;
+    background:rgba(34, 49, 63, 1);
+    width:60%;
+    margin-left:20%;
+    color:#fff;
+}
+.load-pause{
+    width:40%;
+    margin-left:15%;
+}
+.holder{
+    margin:0px;
+    height:90%;
+    width:100%;
+    overflow-y:auto;
+    overflow-x:hidden;
+}
+#title{
+    text-align:center;
+}
+#contain-lost div{
+    width:15%;
+    margin:1%;
+}
+#contain-lost{
+    display:flex;
+    width:90%;
+    margin-left:5%;
+    margin-top:1%;
+    background:#fff;
+}
+#log-in form{
+    position:relative;
+    height:auto;
+    width:100%;
+    border:1px solid rgba(234,234,234,1);
+    border-radius:20px;
+    text-align:center;
+}
+.section-heading{
+    background:rgba(255,255,255,1);
+    width:100%;
+    color:#000;
+    text-align:center;
+}
+#graph{
+    float:left;
+    width:50%;
+}
+#string-data img{
+    float:left;
+}
+#string-data div{
+    display:flex;
+    width:100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+#string-data{
+    float:right;
+    width:50%;
+    height:auto;
+}
+.cryptos-about-area{
+    width:100%;
+    display:flex;
+    color:#fff;
+}
+.avatar-undraw{
+    height:35%;
+    width:40%;
+    margin:1%;
+}
+.avatar-undraw-c{
+    height:35%;
+    width:40%;
+    margin:1%;
+}
+.welcome-header h1{
+    color:#fff;
+}
+.welcome-header img{
+    height:200px;
+    width:300px;
+    float:left;
+    margin:2%;
+    border-radius:50%;
+}
+.welcome-header{
+    width:100%;
+    height:90%;
+}
+.main-header{
+    width:100%;
+    height:100%;
+    background:#fff;
+}
+.quantity{
+    height:100px;
+    width:100px;
+    border-radius:10px;
+    background:#F7F8FB;
+}
+.container-fluid section{
+    display:flex;
+}
+.container-fluid{
+    width:100%;
+    background:#F7F8FB;
+    height:100%;
+}
+.single-feature{
+    width:23%;
+    min-height:100%;
+    margin:1%;
+    background:#fff;
+    border-radius:15px;
+    text-align:center;
+}
+#Home{
+    scroll-behavior:smooth;
+}
+.Navigation a{
+    color:#fff;
+}
+.Navigation{
+    width:100%;
+    color:#000;
+    display:flex;
+    position:sticky;
+    top:0px;
+}
+.inside{
+    color:#000;
+    border:1px solid #ccc;
+    width:300px;
+    height:40px;
+}
+.avatar-undraw{
+    height:62%;
+    width:50%;
+    float:left;
+}
+#Account{
+    background:#fff;
+    scroll-behavior:smooth;
+    overflow-y:hidden;
+}
+#log-in{
+    height:100%
+}
+.route-sign-register{
+    color:rgba(0,0,0,0.7);
+}
+#about{
+    width:100%;
+    text-align:center;
+    background:#fff;
+}
+#Lost{
+    background:#F7F8FB;
+}
+#Found{
+    background:#F7F8FB;
+}
+#contact{
+    width:100%;
+    background:#fff;
+    text-align:center;
+}
+.bin{
+    color:#000;
+    margin:1%;
+}
+#info{
+    text-align:center;
+    background:#fff;
+}
+.pdf{
+    height:40x;
+    border-radius:10px;
+    border:1px solid rgba(234,234,234,1);
+    width:60%;
+    font-size:110%;
+}
+#cons{
+    font-size:150%;
+}
+#Logistics{
+    background:#fff;
+}
+#create-account{
+    width:100%;
+    height:100%;
+}
+#create-account form{
+    position:relative;
+    text-align:center;
+    height:auto;
+    width:100%;
+    border:1px solid rgba(234,234,234,1);
+    border-radius:20px;
+    height:65%;
+    margin:2%;
+}
+#input-div{
+    width:100%;
+    display:flex;
+}
+.i{
+    margin-left:2%;
+    font-size:110%;
+}
+.sendIfno{
+    width:100%;
+    border:none;
+    background:rgba(34, 49, 63, 1);
+    color:#fff;
+    margin-top:1%;
+    font-size:120%;
+}
+.add-info{
+    background:transparent;
+    font-size:120%;
+    text-style:underline;
+}
+.input{
+    height:40px;
+    width:80%;
+    margin-left:10%;
+    border:none;
+    border-bottom:1px solid rgba(234, 234, 234, 1);
+}
+.input-reg{
+    height:40px;
+    width:32%;
+    margin-left:1%;
+    border:none;
+    border-bottom:1px solid rgba(234, 234, 234, 1);
+}
+@media(min-width:856px){
+
+    .slide{
+        top:0px;
+    }
+    .holder{
+        margin-top:5%;
+    }
+    #log-in form{
+        position:relative;
+        margin-top:10%;
+        right:20%;
+        height:auto;
+        width:40%;
+        border:1px solid rgba(234,234,234,1);
+        border-radius:20px;
+        float:right;
+        justify-content:center;
+        text-align:center;
+    }
+    .avatar-undraw-c{
+        height:35%;
+        width:30%;
+        float:right;
+    }
+    #create-account form{
+        position:relative;
+        right:7%;
+        width:40%;
+        border:1px solid rgba(234,234,234,1);
+        border-radius:20px;
+        float:right;
+    }
+    #log-in{
+        margin-top: 5%;
+    }
+    #create-account{
+        margin-top: 5%;
+    }
+}
