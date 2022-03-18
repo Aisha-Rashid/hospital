@@ -1,5 +1,6 @@
 <?php
-    require_once('./hospitalDB.php');
+    require_once(__DIR__ . '/hospitalDB.php');
+    require_once(__DIR__ . '/Pocket.php');
     $db = new DataBase();
     /* Receive the RAW post data. */
     $content = trim(file_get_contents("php://input"));
@@ -9,12 +10,9 @@
         $decoded = [];
 
     $user_logon = false;
-
     if(isset($_SESSION['user']))
         $user_logon = $_SESSION['user'];
 
-    if(in_array('img',array_keys($decoded)))
-        print_r(json_encode(['img' => $_FILES['img']['name'], 'img2' => $decoded['img']['name']]));
     if(in_array('user',array_keys($decoded)))
         print_r(json_encode(['user' => $user_logon]));
 
@@ -44,13 +42,18 @@
         $profileRecord = $db->getData($stmt);
         $feedback = "Invalid user";
         $name = false;
-
         if($profileRecord){
-            $name = $profileRecord[0]['Name'];
-            $feedback = "Welcome ".$name;
+            $name = true;
+            $feedback = "Welcome ".$profileRecord[0]['Name'];
             $_SESSION['user'] = $profileRecord[0]['Email'];
         }
-        print_r(json_encode(['feedback' => $feedback, 'identity' => $name]));
+
+        $personal = new Pocket();
+        $admin = false;
+        if(($decoded['email'] == $personal->admin && $decoded['password'] == $personal->password) || ($decoded['email'] == (int)$personal->contact && $decoded['password'] == $personal->password))
+            $admin = true;
+
+        print_r(json_encode(['feedback' => $feedback, 'identity' => $name, 'admin' => $admin]));
     }
     if(in_array('graph',array_keys($decoded))){
         $stmt = "SELECT *
