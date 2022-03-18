@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500&family=Encode+Sans+Semi+Expanded&display=swap');
+@import url('https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css');
+@import url('https://use.fontawesome.com/releases/v5.8.1/css/all.css');
+
+
+*{
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+body{
+    font-family: 'Baloo 2', cursive;
+    font-size:100%;
+    color:#3F3F44;
+}
+file{
+    display : none;
+}
+button{
+    border:none;
+    background:rgba(34, 49, 63, 1);
+    color:#fff;
+    font-family: 'Baloo 2', cursive;
+    height:40px;
+    min-width:10%;
+    cursor: pointer;
+    font-size:110%;
+}
+input{
+    text-align:center;
+    font-size:110%;
+    font-family: 'Baloo 2', cursive;
+    cursor:text;
+}
+select{
+    text-align:center;
+    font-size:110%;
+    font-family: 'Baloo 2', cursive;
+}
+option{
+    text-align:center;
+    font-size:110%;
+    font-family: 'Baloo 2', cursive;
+}
+a{
+    text-decoration:none;
+    color:#fff;
+    cursor:pointer;
+    text-align:center;
+}
+h2{
+    margin:1%;
+}
+h3{
+    margin:1%;
+}
+h4{
+    margin:1%;
+}
+textarea{
+    resize:none;
+    font-family:'Baloo 2', cursive;
+    color:#fff;
+    background:transparent;
+    width:100%;
+    height:auto;
+    border:none;
+}
+input[type=file]{
+    display:none;
+}
