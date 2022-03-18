@@ -3,7 +3,7 @@ import * as build from "./build.js"
 //When the page loads
 $(document).ready(function(){
     //One
-    ['Home','Account','main-bar','Logistics','load','pauseWindow'].map( d => {
+    ['Home','Account','main-bar','Logistics'].map( d => {
         let g = document.createElement("div");
         g.setAttribute("id", d);
         let c = 'holder';
@@ -13,7 +13,7 @@ $(document).ready(function(){
         document.getElementById('build').appendChild(g);
     })
 
-    build.hospitalContent([1,2,3,4,5])
+    build.hospitalContent([1,2,3,4])
 
     $(document).on('click','#AccessForm', (e) => {
         e.preventDefault();
@@ -22,6 +22,14 @@ $(document).ready(function(){
     $(document).on('click','.input',function(e){
         e.preventDefault();
         $(this).css('border-bottom','1px solid #ccc')
+    })
+    $(document).on('keyup','.input',function(e){
+        e.preventDefault();
+        const index = e.currentTarget.attributes[1].value
+        if(e.currentTarget.value)
+            $(index).slideDown('slow')
+        else
+            $(index).slideUp('slow')
     })
     $(document).on('click','#bb',function(e){
         e.preventDefault();
