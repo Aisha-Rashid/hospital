@@ -16,6 +16,96 @@
     if(in_array('user',array_keys($decoded)))
         print_r(json_encode(['user' => $user_logon]));
 
+    if(isset($_POST['create-record'])){
+
+        $target = "./../Images/".basename($_FILES['img']['name']);
+        move_uploaded_file($_FILES['img']['tmp_name'],$target);
+
+        $insertArray = array(
+            ['key' => 'Sickness', 'value' => $_POST['sickness']],
+            ['key' => 'Symptoms', 'value' => $_POST['symptoms']],
+            ['key' => 'Medicine', 'value' => $_POST['medicine']],
+            ['key' => 'Email', 'value' => $user_logon],
+            ['key' => 'Treatment', 'value' => $_POST['treatment']],
+            ['key' => 'DoctorName', 'value' => $_POST['doctor_record']],
+            ['key' => 'hospitalId', 'value' => $_POST['count']],
+            ['key' => 'HospitalName', 'value' => $_POST['sickness_record']]
+        );
+        $Records = $db->insertData('records',$insertArray);
+
+        function obtain($Records){
+            if($Records)
+                return 'Registered successfully';
+            elseif(($Records == "null"))
+                return 'Error with hospital inputs';
+            else
+                return 'Error with hospital registration';
+        }
+        $feedback = obtain($Records);
+
+        print_r(json_encode(['feedback' => $feedback, 'success' => $Records]));
+
+    }
+
+
+    if(isset($_POST['create-doctor'])){
+
+        $target = "./../Images/".basename($_FILES['img']['name']);
+        move_uploaded_file($_FILES['img']['tmp_name'],$target);
+
+        $insertArray = array(
+            ['key' => 'Name', 'value' => $_POST['name']],
+            ['key' => 'Age', 'value' => $_POST['age']],
+            ['key' => 'Telephone', 'value' => $_POST['telephone']],
+            ['key' => 'Email', 'value' => $_POST['email']],
+            ['key' => 'Gender', 'value' => $_POST['gender']],
+            ['key' => 'hospitalId', 'value' => $_POST['count']],
+            ['key' => 'HospitalName', 'value' => $_POST['hospital']],
+            ['key' => 'Image', 'value' => 'http://localhost/visit_hospital/Images/'.basename($_FILES['img']['name'])]
+        );
+        $doctorRecord = $db->insertData('doctor',$insertArray);
+
+        function obtain($doctorRecord){
+            if($doctorRecord)
+                return 'Registered successfully';
+            elseif(($doctorRecord == "null"))
+                return 'Error with hospital inputs';
+            else
+                return 'Error with hospital registration';
+        }
+        $feedback = obtain($doctorRecord);
+
+        print_r(json_encode(['feedback' => $feedback, 'success' => $doctorRecord]));
+
+    }
+
+    if(isset($_POST['create-hospital'])){
+
+        $target = "./../Images/".basename($_FILES['img']['name']);
+        move_uploaded_file($_FILES['img']['tmp_name'],$target);
+
+        $insertArray = array(
+            ['key' => 'Name', 'value' => $_POST['name']],
+            ['key' => 'Email', 'value' => $_POST['email']],
+            ['key' => 'Telephone', 'value' => $_POST['telephone']],
+            ['key' => 'Address', 'value' => $_POST['address']],
+            ['key' => 'Image', 'value' => 'http://localhost/visit_hospital/Images/'.basename($_FILES['img']['name'])]
+        );
+        $hospitalRecord = $db->insertData('hospital',$insertArray);
+
+        function obtain($hospitalRecord){
+            if($hospitalRecord)
+                return 'Registered successfully';
+            elseif(($hospitalRecord == "null"))
+                return 'Error with hospital inputs';
+            else
+                return 'Error with hospital registration';
+        }
+        $feedback = obtain($hospitalRecord);
+
+        print_r(json_encode(['feedback' => $feedback, 'success' => $hospitalRecord]));
+
+    }
     if(isset($_POST['create'])){
 
         $target = "./../Images/".basename($_FILES['img']['name']);
@@ -26,14 +116,128 @@
             ['key' => 'Age', 'value' => $_POST['age']],
             ['key' => 'Email', 'value' => $_POST['email']],
             ['key' => 'Telephone', 'value' => $_POST['telephone']],
+            ['key' => 'Gender', 'value' => $_POST['gender']],
+            ['key' => 'Switch', 'value' => 'patient'],
             ['key' => 'Image', 'value' => 'http://localhost/visit_hospital/Images/'.basename($_FILES['img']['name'])],
             ['key' => 'Password', 'value' => $_POST['password']]
         );
-        $insertRecord = $db->insertData('users',$insertArray);
+        $userRecord = $db->insertData('users',$insertArray);
 
-        $feedback = ($insertRecord) ? 'Registered successfully' : 'Error with registration';
-        print_r(json_encode(['feedback' => $feedback, 'success' => $insertRecord]));
+        function obtain($userRecord){
+            if($userRecord)
+                return 'Registered successfully';
+            elseif(($userRecord == "null"))
+                return 'Error with hospital inputs';
+            else
+                return 'Error with user registration';
+        }
+        $feedback = obtain($userRecord);
 
+        print_r(json_encode(['feedback' => $feedback, 'success' => $userRecord]));
+
+    }
+    if(in_array('out',array_keys($decoded))){
+        session_destroy();
+        session_unset();
+        print_r(json_encode(['command' => true]));
+    }
+    if(in_array('destroy',array_keys($decoded))){
+
+        $stmt = "DELETE FROM users WHERE Email = '$user_logon'";
+
+        $destruction = $db->deleteData($stmt);
+        print_r(json_encode(['command' => $destruction]));
+    }
+
+    if(in_array('hospital_search',array_keys($decoded))){
+         $mouse = $decoded['data'];
+         $stmt = "SELECT *
+                  FROM hospital WHERE Name LIKE '%$mouse%'";
+
+         $hospital = $db->getData($stmt);
+
+         print_r(json_encode([ 'hospital' => $hospital]));
+    }
+
+    if(in_array('hospital_name',array_keys($decoded))){
+         $stmt = "SELECT *
+                  FROM hospital";
+
+         $hospitals = $db->getData($stmt);
+
+         $data = [];
+         $h = 1;
+         if($hospitals)
+             foreach($hospitals as $hospital){
+                $data[] = [ 'id' => $h .','. $hospital['Name'], 'text' => $hospital['Name'] ];
+                $h++;
+             }
+         print_r(json_encode([ 'all' => $hospitals, 'select' => $data ]));
+    }
+
+    if(in_array('doctor_name',array_keys($decoded))){
+         $stmt = "SELECT *
+                  FROM doctor";
+
+         $doctors = $db->getData($stmt);
+
+         $data = [];
+         $d = 1;
+         if($doctors)
+             foreach($doctors as $doctor){
+                $data[] = [ 'id' => $d .','. $doctor['Name'], 'text' => $doctor['Name'] ];
+                $d++;
+             }
+         print_r(json_encode([ 'all' => $doctors, 'select' => $data ]));
+    }
+
+    if(in_array('record_name',array_keys($decoded))){
+         $stmt = "SELECT *
+                  FROM records WHERE Email = '$user_logon'";
+
+         $records = $db->getData($stmt);
+
+         $data = [];
+         $k = 1;
+         if($records){
+            foreach($records as $record){
+                 $stmt = "SELECT *
+                          FROM users WHERE userId = '".$record['userId']."'";
+
+                 $doctors = $db->getData($stmt);
+                 if($doctors)
+                    foreach($doctors as $doctor){
+                        $data[] = [ 'id' => $k, 'text' => $doctor['Name']];
+                        $k++;
+                    }
+                 $stmt = "SELECT *
+                          FROM hospital WHERE hospitalId = '".$record['hospitalId']."'";
+
+                 $hospitals = $db->getData($stmt);
+                 if($hospitals)
+                    foreach($hospitals as $hospital){
+                        $data[] = [ 'id' => $k .','. $doctor['Name'], 'text' => $doctor['Name']];
+                        $k++;
+                    }
+            }
+         }
+
+        $stmt = "SELECT *
+               FROM package WHERE Email = '$user_logon'";
+
+        $package = $db->getData($stmt);
+        $member = false;
+        if($package)
+            $member = $package['Package'];
+
+        print_r(json_encode([ 'all' => $records, 'select' => $data, 'packages' => $member]));
+    }
+    if(in_array('profile',array_keys($decoded))){
+         $stmt = "SELECT *
+                  FROM users WHERE Email = '$user_logon'";
+
+         $users = $db->getData($stmt);
+         print_r(json_encode([ 'users' => $users]));
     }
     if(in_array('login',array_keys($decoded))){
         $stmt = "SELECT *
@@ -61,7 +265,7 @@
 
         $foundRecord = $db->getData($stmt);
         $graphData = [];
-        if($foundRecord){
+        if(($foundRecord)){
             foreach($foundRecord as $foundItem){
                 $TIMESTAMP = $foundItem['TIMESTAMP'];
                 $time = strtotime($TIMESTAMP);

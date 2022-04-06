@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500&family=Encode+Sans+Semi+Expanded&display=swap');
 @import url('https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css');
+@import url('https://use.fontawesome.com/releases/v6.1.1/css/all.css');
 @import url('https://use.fontawesome.com/releases/v5.8.1/css/all.css');
 
 
@@ -78,15 +79,11 @@ input[type=file]{
     position:fixed;
     flex-direction:column;
     overflow:hidden;
-    background-image:linear-gradient(rgba(0, 0, 0, 0.4),rgba(0, 0, 0, 0.5),rgba(255,255,255,0.5)),url(https://media.sciencephoto.com/f0/20/52/90/f0205290-800px-wm.jpg);
-    -webkit-background-size:cover;
-    background-size:cover;
-    background-repeat:no-repeat;
-    background-position:center;
 }
 .slide a{
     width:18%;
     margin-left:1%;
+    color:#3F3F44;
 }
 .slide{
     height:10%;
@@ -108,15 +105,15 @@ input[type=file]{
 .add-on-register{
     height:30px;
     border:1px solid #ccc;
+    border-bottom : none;
     width:100%;
     margin:1px;
-    border-radius:10px;
     display:none;
 }
 #pauseWindow{
     display:none;
     z-index:17;
-    background:rgb(0,0,0,0.8);
+    background:#fff;
     width:100%;
     height:100%;
     position:fixed;
@@ -138,7 +135,6 @@ input[type=file]{
 }
 .load-pause{
     width:40%;
-    margin-left:15%;
 }
 .holder{
     margin:0px;
@@ -208,24 +204,163 @@ input[type=file]{
     width:40%;
     margin:1%;
 }
+#register{
+    width : 100%;
+    height : 60%;
+    margin-top:1%;
+}
+#personal-hospital{
+    float: right;
+    width: 58%;
+    margin-top: 10%;
+}
+#personal-doctor{
+    float: right;
+    width: 58%;
+    margin-top: 10%;
+}
+#register img{
+    height : 40%;
+    width : 40%;
+    float : left;
+}
 .welcome-header h1{
     color:#fff;
 }
-.welcome-header img{
-    height:200px;
-    width:300px;
-    float:left;
-    margin:2%;
-    border-radius:50%;
-}
 .welcome-header{
     width:100%;
-    height:70%;
+    height:100%;
 }
-.main-header{
+.welcome-header-box{
     width:100%;
     height:100%;
+    position : relative;
+}
+.welcome-header-box-in{
+    width:100%;
+    height:100%;
+    transition: opacity 0.7s ease-in-out;
+    position : absolute;
+}
+.lbox-details{
+    width : 100%;
+    height : 100%;
+    -webkit-background-size:cover;
+    background-size:cover;
+    background-repeat:no-repeat;
+    background-position:center;
+    text-align:center;
+}
+.push-left{
+    font-size : 170%;
+    float : left;
+    background : rgba(0,0,0,0.7);
+    margin-top : 20%;
+    color : #fff;
+    z-index : 4;
+    z-index : 4;
+    position : relative;
+}
+.push-right{
+    font-size : 170%;
+    float : right;
+    background : rgba(0,0,0,0.7);
+    margin-top : 20%;
+    color : #fff;
+    z-index : 4;
+    position : relative;
+}
+#content-box a{
+    border : 2px solid #fff;
+    min-height : 40px;
+    width : 150px;
+    background-image : linear-gradient(#f82c8b,#cf4a80,#fd97e2);
+    display : inline-block;
+}
+#content-box{
+    width : 40%;
+    height : 40%;
+    margin-left : 30%;
+    margin-bottom : 5%;
+    border : 1px solid #fff;
+    color : #fff;
+    position : relative;
+    top : 30%;
+}
+#about{
+    display : flex;
+}
+.about-wall{
+    width : 48%;
+    margin : 1%;
+}
+
+.about-m{
+	border: 2px solid #268181;
+	box-shadow: 0 10px 25px 0 rgba(0,0,40,.2);
+}
+.about-m ul#banner {
+  position: relative;
+  width: 100%;
+  height: 450px;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.about-m ul#banner li {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: none;
+}
+.row{
+    display : flex;
+}
+.media-left icon-b{
+    border : 1px solid #ccc;
+    width : 30%;
+    margin : 1%;
+}
+.viewData{
+    width : 98%;
+    height : auto;
+    margin : 1%;
+}
+.about-m ul#banner li img {
+	visibility: hidden;
+	width: 100%;
+}
+
+.about-m ul#banner li canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.about-img{
+    width : 48%;
+    margin : 1%;
+}
+#title-box{
+    text-align : center;
+}
+#services{
+    width : 100%;
+    text-align : center;
+}
+.row{
+    display : flex;
+}
+.serviceBox{
+    width : 48%;
+    margin : 1%;
+}
+.main-header{
+    width:50%;
+    height:50%;
     background:#fff;
+    float : right;
+    margin : 0.5%;
 }
 .quantity{
     height:100px;
@@ -254,23 +389,31 @@ input[type=file]{
 }
 .Navigation a{
     color:#fff;
+    height : 100%;
+    width : 200px;
+    margin : 1%;
+    boder : none;
+    border-left : 1px solid #ccc;
 }
 .Navigation{
     width:100%;
-    color:#000;
+    color:#fff;
     display:flex;
     position:sticky;
     top:0px;
+    background: rgba(0,0,0,0.5);
+    margin-top: -4%;
+    z-index: 4;
 }
 .inside{
     color:#000;
-    border:1px solid #ccc;
+    border:2px solid #ccc;
     width:300px;
     height:40px;
+    border-radius : 10px;
 }
 .avatar-undraw{
     height:62%;
-    width:50%;
     float:left;
 }
 #Account{
@@ -312,7 +455,7 @@ input[type=file]{
     height:40x;
     border-radius:10px;
     border:1px solid rgba(234,234,234,1);
-    width:60%;
+    width:20%;
     font-size:110%;
 }
 #cons{
@@ -338,6 +481,7 @@ input[type=file]{
 #input-div{
     width:100%;
     display:flex;
+    text-align : center;
 }
 #input-div-internal{
     display:flex;
@@ -375,6 +519,30 @@ input[type=file]{
     border:none;
     border-bottom:1px solid rgba(234, 234, 234, 1);
 }
+#make-switch fas{
+    font-size : 140%;
+}
+#make-switch{
+    background : #fff;
+    border : 1px solid #ccc;
+    border-radius : 10px;
+    color : #000;
+    width : 48%;
+    margin : 1%;
+    height : 100%;
+}
+.hospital_doctor{
+    display : none;
+}
+.hospital_register{
+    display : none;
+}
+.office_icon {
+
+    background-image: url("https://hr.tum.ac.ke/public/cache/images/tree_icons.png");
+
+}
+
 @media(min-width:856px){
 
     .slide{
@@ -402,11 +570,11 @@ input[type=file]{
     }
     #create-account form{
         position:relative;
-        right:7%;
-        width:40%;
+        width:50%;
         border:1px solid rgba(234,234,234,1);
         border-radius:20px;
         float:right;
+        height : auto;
     }
     #log-in{
         margin-top: 5%;

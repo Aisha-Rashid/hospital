@@ -14,7 +14,6 @@ class DataBase
 		$this->UserDB = "root";
 		$this->Pass = ""; //Change to name from url
 		$this->DB_name = "hospital";
-        $this->MySQL_CON_op = mysqli_connect($this->localhost,$this->UserDB,$this->Pass,$this->DB_name)or trigger_error(mysqli_error($this->MySQL_CON),E_USER_ERROR);
 		$this->MySQL_CON = $this->connection();
 	}
 	function connection(){
@@ -28,7 +27,7 @@ class DataBase
                          );
           // set the PDO error mode to exception
           $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            return $conn;
+          return $conn;
         } catch(PDOException $e) {
           return "Connection failed: " . $e->getMessage();
         }
@@ -47,7 +46,14 @@ class DataBase
         }else
             return false;
     }
-
+    function deleteData($statement)
+    {
+         $conn->exec($statement);
+         if($conn)
+            return true;
+        else
+            return false;
+    }
     function getData($statement)
     {
         $stmt = $this->MySQL_CON->prepare($statement);
@@ -57,7 +63,7 @@ class DataBase
         if (count($data) > 0)
             return $data;
         else
-            return false;
+            return [];
     }
     function updateData($statement)
     {

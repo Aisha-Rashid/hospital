@@ -69,3 +69,176 @@ textarea{
 input[type=file]{
     display:none;
 }
+#account-holder{
+    width : 100%;
+    height : 100%;
+    background : #F7F8FB;
+}
+#account-nav{
+    width : 28%;
+    height : 98%;
+    margin : 1%;
+    border : 2px solid #fff;
+    float : left;
+}
+#account-content{
+    width : 70%;
+    height : 98%;
+    margin-top : 1%;
+    float : right;
+    overflow : auto;
+}
+#delete-icon{
+    height : 40%;
+    width : 40%;
+    margin-left : 30%;
+    margin-top : 5%;
+}
+#main-focus{
+    width : 100%;
+    height : 85%;
+    background : #fff;
+}
+#main-footer{
+    width : 100%;
+    height : 15%;
+}
+#account-nav img{
+    height : 20%;
+    width : 40%;
+    border : none;
+    position : relative;
+    left : 30%;
+}
+.account-window button{
+    background : #fff;
+    border-bottom : 1px solid #F7F8FB;
+    font-size : 80%;
+}
+.account-window{
+    display : none;
+}
+#account-nav button{
+    height : 40px;
+    width : 98%;
+    margin : 1%;
+    border-bottom : 1px solid #fff;
+    color : #3F3F44;
+    background : #F7F8FB;
+    text-align : left;
+}
+
+#outer-profile{
+    height : 100%;
+    width : 90%;
+    display : flex;
+    flex-direction : column;
+}
+#inner-profile{
+    width : 100%;
+    display : flex;
+    flex-direction : row;
+    height : 45%;
+    text-align : center;
+}
+#profile-tower i{
+    font-size : 200%;
+}
+#profile-tower input{
+    border : none;
+}
+#profile-tower{
+    border : 1px solid #ccc;
+    height : 98%;
+    width : 33%;
+    margin : 1%;
+}
+#profile-avatar{
+    width : 30%;
+}
+#main-footer{
+    width : 100%;
+}
+#profile-avatar img{
+    width : 30%;
+    height : 30%;
+}
+#hold_search{
+    display : flex;
+    width : 98%;
+    margin : 1%;
+    height : 40px;
+}
+#Get_doctor_hospital{
+    display : flex;
+    width : 98%;
+    margin : 1%;
+    height : 40px;
+}
+#hold_search_doctor{
+    display : flex;
+    width : 98%;
+    margin : 1%;
+    height : 40px;
+}
+#hold_search_record{
+    display : flex;
+    width : 98%;
+    margin : 1%;
+    height : 40px;
+}
+#view_hospital{
+    width : 80%;
+    float : left;
+}
+#view_doctor{
+    width : 80%;
+    float : left;
+}
+#view_record{
+    width : 80%;
+    float : left;
+}
+#doctor-record{
+    width : 80%;
+    float : left;
+}
+#sickness-record{
+    width : 80%;
+    float : left;
+}
+#personal-record div{
+    width : 80%;
+    margin-left : 10%;
+}
+#personal-record{
+    width : 80%;
+    margin-left : 10%;
+}
+#wall-package{
+    position : sticky;
+    top : 0px;
+}
+#search_hospital{
+    width : 20%;
+    float : right;
+    height : 30px;
+    border-radius : 10px;
+}
+#view_hospitals{
+    width : 98%;
+    margin : 1%;
+    background : #F7F8FB;
+}
+#hospital_id{
+    background : #fff;
+    margin : 1%;
+    width : 98%;
+}
+#pin{
+    font-size : 120%;
+    color : #FFDE2B;
+}
+#sign-out{
+    cursor : pointer;
+}

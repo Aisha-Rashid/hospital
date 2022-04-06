@@ -1,0 +1,11 @@
+TABLE, TH, TD {
+	BORDER: 1px solid white;
+	BORDER-COLLAPSE: collapse;
+	WIDTH: 100%;
+	}
+TH, TD{
+	PADDING:4px;
+	SPACING:3px;
+	FONT-SIZE:18px;
+	COLOR:black;
+	}
