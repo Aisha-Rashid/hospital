@@ -437,88 +437,6 @@ button:focus{
 	height: 50%;
 }
 
-.lbox-caption {
-    display: table;
-    height: 50% !important;
-	width: 100% !important;
-	left: 0 !important;
-}
-
-.lbox-caption {
-    position: absolute;
-    margin: 0 auto;
-    left: 0;
-    right: 0;
-	z-index: 10;
-}
-
-.lbox-details {
-    display: table-cell;
-    text-align: center;
-    vertical-align: middle;
-	position: absolute;
-	top: 0px;
-	left: 0;
-	right: 0;
-	height: 50%;
-	padding: 22% 0%;
-}
-
-.lbox-details::before{
-	content: "";
-	background: rgba(0,0,0,0.5);
-	position: absolute;
-	top: 0px;
-	left: 0px;
-	width: 100%;
-	height: 100%;
-	z-index: 2;
-}
-
-.lbox-details h1{
-	font-size: 54px;
-	font-family: 'Catamaran', sans-serif;
-	color: #ffffff;
-	font-weight: 600;
-	position: relative;
-	z-index: 3;
-}
-
-.lbox-details h2{
-	font-size: 48px;
-	color: #ffffff;
-	font-weight: 300;
-	position: relative;
-	z-index: 3;
-}
-.lbox-details p{
-	color: #ffffff;
-	position: relative;
-	z-index: 3;
-}
-.lbox-details p strong{
-	color: #268181;
-	font-size: 40px;
-	font-family: 'Catamaran', sans-serif;
-}
-.lbox-details a.btn{
-	background: #12557f;
-	padding: 10px 20px;
-	font-size: 20px;
-	text-transform: capitalize;
-	color: #ffffff;
-	border-radius: 0px;
-	border: 2px solid #ffffff;
-	position: relative;
-	display: inline-block;
-	z-index: 3;
-}
-.lbox-details a.btn:hover{
-	background: #268181;
-	color: #ffffff;
-}
-
-
 
 /*------------------------------------------------------------------
     About
@@ -1269,16 +1187,17 @@ button:focus{
 	width: 33.33%;
 	float: left;
 }
+.icon-b a{
+    font-size : 50%;
+}
 .icon-b{
-	width: 80px;
-	height: 80px;
+	width: 30%;
+	height: auto;
 	text-align: center;
-	line-height: 80px;
 	font-size: 40px;
 	border: 2px dotted #12557f;
-	margin-right: 10px;
+	margin: 1%;
 	color: #268181;
-	border-radius: 50%;
 }
 
 .dit-right h4{

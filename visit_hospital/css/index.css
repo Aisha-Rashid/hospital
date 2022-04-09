@@ -101,6 +101,7 @@ input[type=file]{
     border-radius:10px;
     width:40%;
     display:none;
+    margin-left : 15%;
 }
 .add-on-register{
     height:30px;
@@ -273,7 +274,7 @@ input[type=file]{
 #content-box a{
     border : 2px solid #fff;
     min-height : 40px;
-    width : 150px;
+    width : 250px;
     background-image : linear-gradient(#f82c8b,#cf4a80,#fd97e2);
     display : inline-block;
 }
@@ -442,6 +443,7 @@ input[type=file]{
     width:100%;
     background:#fff;
     text-align:center;
+    height : 100%;
 }
 .bin{
     color:#000;

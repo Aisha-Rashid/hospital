@@ -3,7 +3,7 @@ import * as build from "./build.js"
 //When the page loads
 $(document).ready(function(){
     //One
-    ['Home','Account','main-bar','Logistics'].map( d => {
+    ['Home','Account','main-bar'].map( d => {
         let g = document.createElement("div");
         g.setAttribute("id", d);
         let c = 'holder';

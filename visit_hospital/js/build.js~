@@ -791,7 +791,7 @@ export const hospitalContent = async(no_panel) => {
                         else
                             ServerData.home++
                         $('#wall' + ServerData.home).fadeIn('slow');
-                    },4000
+                    },2000
                 );
                 (function($, window, document, undefined) {
 

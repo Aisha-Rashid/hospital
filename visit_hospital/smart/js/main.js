@@ -1,7 +1,7 @@
 (function($, window, document, undefined) {
 
     $.fn.slider = function() {
-
+        alert('Hey')
         return this.each(function(options) {
 
             var that = $(this);
