@@ -48,7 +48,7 @@ class DataBase
     }
     function deleteData($statement)
     {
-         $conn->exec($statement);
+         $conn = $this->MySQL_CON->exec($statement);
          if($conn)
             return true;
         else

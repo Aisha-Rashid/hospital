@@ -13,8 +13,22 @@
     if(isset($_SESSION['user']))
         $user_logon = $_SESSION['user'];
 
-    if(in_array('user',array_keys($decoded)))
-        print_r(json_encode(['user' => $user_logon]));
+    if(in_array('user',array_keys($decoded))){
+         $name = false;
+         if($user_logon){
+             $stmt = "SELECT *
+                      FROM users WHERE Email = '$user_logon'";
+             $user = $db->getData($stmt);
+             if(count($user) < 1){
+                 $stmt = "SELECT *
+                          FROM doctor WHERE Email = '$user_logon'";
+                 $user = $db->getData($stmt);
+             }
+             $name = $user[0]['Name'];
+         }
+
+        print_r(json_encode(['user' => $user_logon, 'name' => $name]));
+    }
 
     if(isset($_POST['create-record'])){
 
@@ -29,6 +43,8 @@
             ['key' => 'Treatment', 'value' => $_POST['treatment']],
             ['key' => 'DoctorName', 'value' => $_POST['doctor_record']],
             ['key' => 'hospitalId', 'value' => $_POST['count']],
+            ['key' => 'doctorId', 'value' => $_POST['doctor']],
+            ['key' => 'Image', 'value' => 'http://localhost/visit_hospital/Images/'.basename($_FILES['img']['name'])],
             ['key' => 'HospitalName', 'value' => $_POST['sickness_record']]
         );
         $Records = $db->insertData('records',$insertArray);
@@ -117,7 +133,6 @@
             ['key' => 'Email', 'value' => $_POST['email']],
             ['key' => 'Telephone', 'value' => $_POST['telephone']],
             ['key' => 'Gender', 'value' => $_POST['gender']],
-            ['key' => 'Switch', 'value' => 'patient'],
             ['key' => 'Image', 'value' => 'http://localhost/visit_hospital/Images/'.basename($_FILES['img']['name'])],
             ['key' => 'Password', 'value' => $_POST['password']]
         );
@@ -149,6 +164,22 @@
         print_r(json_encode(['command' => $destruction]));
     }
 
+    if(in_array('destroy_hospital',array_keys($decoded))){
+
+        $stmt = "DELETE FROM hospital WHERE hospitalId = '".$decoded['id']."'";
+
+        $destruction = $db->deleteData($stmt);
+        print_r(json_encode(['command' => $destruction]));
+    }
+
+    if(in_array('destroy_doctor',array_keys($decoded))){
+
+        $stmt = "DELETE FROM doctor WHERE doctorId = '".$decoded['id']."'";
+
+        $destruction = $db->deleteData($stmt);
+        print_r(json_encode(['command' => $destruction]));
+    }
+
     if(in_array('hospital_search',array_keys($decoded))){
          $mouse = $decoded['data'];
          $stmt = "SELECT *
@@ -159,6 +190,26 @@
          print_r(json_encode([ 'hospital' => $hospital]));
     }
 
+    if(in_array('doctor_search',array_keys($decoded))){
+         $mouse = $decoded['data'];
+         $stmt = "SELECT *
+                  FROM doctor WHERE Name LIKE '%$mouse%'";
+
+         $doctor = $db->getData($stmt);
+
+         print_r(json_encode([ 'doctor' => $doctor]));
+    }
+
+    if(in_array('record_search',array_keys($decoded))){
+         $mouse = $decoded['data'];
+         $stmt = "SELECT *
+                  FROM records WHERE DoctorName LIKE '%$mouse%' OR HospitalName LIKE '%$mouse%'";
+
+         $record = $db->getData($stmt);
+
+         print_r(json_encode([ 'record' => $record]));
+    }
+
     if(in_array('hospital_name',array_keys($decoded))){
          $stmt = "SELECT *
                   FROM hospital";
@@ -166,12 +217,10 @@
          $hospitals = $db->getData($stmt);
 
          $data = [];
-         $h = 1;
          if($hospitals)
-             foreach($hospitals as $hospital){
-                $data[] = [ 'id' => $h .','. $hospital['Name'], 'text' => $hospital['Name'] ];
-                $h++;
-             }
+             foreach($hospitals as $hospital)
+                $data[] = [ 'id' => $hospital['hospitalId'] .','. $hospital['Name'], 'text' => $hospital['Name'] ];
+
          print_r(json_encode([ 'all' => $hospitals, 'select' => $data ]));
     }
 
@@ -182,12 +231,10 @@
          $doctors = $db->getData($stmt);
 
          $data = [];
-         $d = 1;
          if($doctors)
-             foreach($doctors as $doctor){
-                $data[] = [ 'id' => $d .','. $doctor['Name'], 'text' => $doctor['Name'] ];
-                $d++;
-             }
+             foreach($doctors as $doctor)
+                $data[] = [ 'id' => $doctor['doctorId'] .','. $doctor['Name'], 'text' => $doctor['Name'] ];
+
          print_r(json_encode([ 'all' => $doctors, 'select' => $data ]));
     }
 
@@ -198,27 +245,24 @@
          $records = $db->getData($stmt);
 
          $data = [];
-         $k = 1;
          if($records){
             foreach($records as $record){
                  $stmt = "SELECT *
-                          FROM users WHERE userId = '".$record['userId']."'";
+                          FROM doctor WHERE doctorId = '".$record['doctorId']."'";
 
                  $doctors = $db->getData($stmt);
                  if($doctors)
-                    foreach($doctors as $doctor){
-                        $data[] = [ 'id' => $k, 'text' => $doctor['Name']];
-                        $k++;
-                    }
+                    foreach($doctors as $doctor)
+                        $data[] = [ 'id' => $doctor['doctorId'] .','. $doctor['Name'], 'text' => $doctor['Name']];
+
                  $stmt = "SELECT *
                           FROM hospital WHERE hospitalId = '".$record['hospitalId']."'";
 
                  $hospitals = $db->getData($stmt);
                  if($hospitals)
-                    foreach($hospitals as $hospital){
-                        $data[] = [ 'id' => $k .','. $doctor['Name'], 'text' => $doctor['Name']];
-                        $k++;
-                    }
+                    foreach($hospitals as $hospital)
+                        $data[] = [ 'id' => $hospital['hospitalId'] .','. $hospital['Name'], 'text' => $hospital['Name']];
+
             }
          }
 
@@ -228,16 +272,65 @@
         $package = $db->getData($stmt);
         $member = false;
         if($package)
-            $member = $package['Package'];
+            $member = $package[0]['Package'];
 
-        print_r(json_encode([ 'all' => $records, 'select' => $data, 'packages' => $member]));
+        print_r(json_encode([ 'all' => $records, 'select' => $data, 'package' => $member]));
+    }
+    if(in_array('apply',array_keys($decoded))){
+        $mpesa_response = false;
+         if((int)$decoded['data'] > 0){
+            require_once("./payment.php");
+            $payment = new Payment();
+            $TransactionDesc = 'Update Package'; //Description
+            $CallBackURL = "https://ukoapp.co.ke/php/Lipa_Na_Mpesa/lipa.php";
+
+            $stmt = "SELECT *
+                      FROM users WHERE Email = '$user_logon'";
+
+            $users = $db->getData($stmt);
+
+            $PhoneNumber = $users[0]["Telephone"];
+            $amount = 5;
+            $mpesa_response = $payment->makeTransaction($amount,$PhoneNumber,$TransactionDesc,$CallBackURL);
+         }
+         $current_package = "BRONZE";
+         if($decoded['data'] == 1)
+            $current_package = "SILVER";
+         if($decoded['data'] == 2)
+            $current_package = "GOLD";
+
+        $stmt = "SELECT *
+               FROM package WHERE Email = '$user_logon'";
+
+        $package_user = $db->getData($stmt);
+        $package = false;
+        if(count($package_user) > 0){
+             $stmt = "UPDATE package SET Package = '$current_package'";
+             $package = $db->updateData($stmt);
+        }else{
+            $insertArray = array(
+                ['key' => 'Email', 'value' => $user_logon],
+                ['key' => 'Package', 'value' => $current_package]
+            );
+            $package = $db->insertData('package',$insertArray);
+        }
+        print_r(json_encode(['package' => $package, 'mpesa' => $mpesa_response]));
     }
     if(in_array('profile',array_keys($decoded))){
          $stmt = "SELECT *
                   FROM users WHERE Email = '$user_logon'";
 
          $users = $db->getData($stmt);
-         print_r(json_encode([ 'users' => $users]));
+
+        $stmt = "SELECT *
+               FROM package WHERE Email = '$user_logon'";
+
+        $package = $db->getData($stmt);
+        $member = "BRONZE";
+        if($package)
+            $member = $package[0]['Package'];
+
+         print_r(json_encode([ 'users' => $users, 'package' => $member]));
     }
     if(in_array('login',array_keys($decoded))){
         $stmt = "SELECT *
@@ -257,11 +350,19 @@
         if(($decoded['email'] == $personal->admin && $decoded['password'] == $personal->password) || ($decoded['email'] == (int)$personal->contact && $decoded['password'] == $personal->password))
             $admin = true;
 
-        print_r(json_encode(['feedback' => $feedback, 'identity' => $name, 'admin' => $admin]));
+        print_r(json_encode(['feedback' => $feedback, 'identity' => $name, 'admin' => $admin, 'extra' => [$personal->admin,$personal->password]]));
     }
     if(in_array('graph',array_keys($decoded))){
+
+        $now_table = "records";
+        if($decoded['table'] == 1)
+            $now_table = "doctor";
+        if($decoded['table'] == 2)
+            $now_table = "users";
+        if($decoded['table'] == 3)
+            $now_table = "hospital";
         $stmt = "SELECT *
-                 FROM records";
+                 FROM $now_table";
 
         $foundRecord = $db->getData($stmt);
         $graphData = [];
